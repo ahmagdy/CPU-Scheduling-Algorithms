@@ -1,6 +1,6 @@
 # CPU-Scheduling-Algorithms
 A Simple Simulation to Scheduling Algorithms.
-* Shortest Job First (SJF) reemptive
+* Shortest Job First (SJF) Preemptive
 * RoundRubin
 
 ##Examples:
@@ -24,7 +24,7 @@ A Simple Simulation to Scheduling Algorithms.
 
             SchedulingAlgorithms.SJFPreemptive(m1);
             
-             SchedulingAlgorithms.SJFPreemptive(m2);
+            
             List<SJFModel> m = new List<SJFModel>()
             {
                 new SJFModel("P1", 0, 8),
