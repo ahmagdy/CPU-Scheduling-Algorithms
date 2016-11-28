@@ -31,6 +31,8 @@ namespace ConsoleApplication13
         }
         public string Name { get; set; }
         public int Value { get; set; }
+        public int WT { get; set; } = 0;
+        public int LastEnd { get; set; } = 0;
     }
 
     public class SchedulingAlgorithms
@@ -95,26 +97,30 @@ namespace ConsoleApplication13
                         continue;
                     Console.Write(tempbegin + "\t");
                     Console.Write($"{item.Name} ({item.Value})");
-                    if (item.Value > 0)
-                        if (item.Value - quantum < 0)
-                        {
-                            tempbegin += item.Value;
-                            item.Value -= item.Value;
-                        }
+                    item.WT = tempbegin - item.LastEnd + item.WT;
+                    if (item.Value - quantum < 0)
+                    {
+                        tempbegin += item.Value;
+                        item.Value -= item.Value;
+                    }
 
-                        else
-                        {
-                            item.Value -= quantum;
-                            tempbegin += quantum;
-                        }
+                    else
+                    {
+                        item.Value -= quantum;
+                        tempbegin += quantum;
+                    }
 
                     Console.Write($"||{item.Value}\t");
                     Console.WriteLine(tempbegin);
                     if (item.Name == highest && item.Value < 1) outx = true;
+                    item.LastEnd = tempbegin;
                 }
                 if (outx) break;
 
             }
+            testHashModels.ForEach(x => Console.WriteLine(x.WT));
+            int sum = testHashModels.Sum(x => x.WT);
+            Console.WriteLine($"AWT  = {sum/testHashModels.Count}");
         }
     }
 
