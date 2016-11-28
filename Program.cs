@@ -28,7 +28,7 @@ namespace ConsoleApplication13
                 at = int.Parse(Console.ReadLine());
                 Console.Write("Enter the Burst Time: ");
                 bu = int.Parse(Console.ReadLine());
-                m1.Add(new SJFModel(pn, at, bu));
+                m1.Add(new SJFModel(pn,  bu, at));
             }
 
             SchedulingAlgorithms.SJFPreemptive(m1);
@@ -53,22 +53,31 @@ namespace ConsoleApplication13
             SchedulingAlgorithms.RoundRubin(h, 5);
             List<SJFModel> m2 = new List<SJFModel>()
             {
-                new SJFModel("P1",0,7),
-                new SJFModel("P2",2,4),
-                new SJFModel("P3",4,1),
-                new SJFModel("P4",5,4)
+				new SJFModel("P1", 7, 0),
+                new SJFModel("P2", 4, 2),
+                new SJFModel("P3", 1, 4),
+                new SJFModel("P4", 4, 5)
 
             };
             SchedulingAlgorithms.SJFPreemptive(m2);
             List<SJFModel> m = new List<SJFModel>()
             {
-                new SJFModel("P1", 0, 8),
-                new SJFModel("P2", 1, 4),
-                new SJFModel("P3", 2, 9),
-                new SJFModel("P4", 3, 5)
+				new SJFModel("P1", 8, 0),
+                new SJFModel("P2", 4, 1),
+                new SJFModel("P3", 9, 2),
+                new SJFModel("P4", 5, 3)
 
             };
             SchedulingAlgorithms.SJFPreemptive(m);
+			
+			List<SJFModel> m = new List<SJFModel>()
+            {
+                new SJFModel("P1",7,0),
+                new SJFModel("P2",4,2),
+                new SJFModel("P3",1,4),
+                new SJFModel("P4",4,5),
+            };
+            SchedulingAlgorithms.SJFNonPreemptive(m);
 
 
         }

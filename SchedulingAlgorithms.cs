@@ -8,7 +8,7 @@ namespace ConsoleApplication13
 {
     public class SJFModel
     {
-        public SJFModel(string processName, int ArriveTime, int BurstTime)
+        public SJFModel(string processName, int BurstTime, int ArriveTime=0)
         {
             this.ProcessName = processName;
             this.ArriveTime = ArriveTime;
@@ -97,6 +97,29 @@ namespace ConsoleApplication13
             //}
             Console.WriteLine($"AWT is = {(double) sum/sjfModels.Count} ");
         }
+		
+		public static void SJFNonPreemptive(IList<SJFModel> sjfModels)
+        {
+            SJFModel holder;
+            int counter = 0;
+            while (true)
+            {
+                holder = sjfModels.Where(i => i.ArriveTime <= counter && i.BurstTime >0)
+                    .OrderBy(x => x.BurstTime).FirstOrDefault();
+                if(holder == null) break;
+                holder.WT = counter - holder.ArriveTime;
+                Console.Write($"{counter}\t {holder.ProcessName} ({holder.BurstTime})\t ");
+                counter += holder.BurstTime;
+                holder.BurstTime -= holder.BurstTime;
+                Console.WriteLine(counter);
+            }
+
+            int sum = 0;
+            sum = sjfModels.Sum(x => x.WT);
+            Console.WriteLine($"AWT is = {(double)sum / sjfModels.Count} ");
+
+        }
+		
 
         public static void RoundRubin(List<HashModel> testHashModels, int quantum)
         {
