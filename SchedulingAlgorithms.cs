@@ -34,6 +34,22 @@ namespace ConsoleApplication13
         public int WT { get; set; } = 0;
         public int LastEnd { get; set; } = 0;
     }
+    
+    public class FCFSModel
+    {
+        public FCFSModel(string Name,int AT,int BT)
+        {
+            this.Name = Name;
+            this.AT = AT;
+            this.BT = BT;
+        }
+
+        public string Name { get; set; }
+        public int AT { get; set; }
+        public int BT { get; set; }
+        public int WT { get; set; }
+    }
+    
 
     public class SchedulingAlgorithms
     {
@@ -122,6 +138,22 @@ namespace ConsoleApplication13
             int sum = testHashModels.Sum(x => x.WT);
             Console.WriteLine($"AWT  = {sum/testHashModels.Count}");
         }
+        
+         public static void FCFS(ICollection<FCFSModel> models)
+        {
+            models = models.OrderBy(p => p.AT).ToList();
+            int counter = 0;
+            foreach (var item in models)
+            {
+                item.WT = counter;
+                Console.Write($"{counter}\t {item.Name}({item.BT})\t");
+                counter += item.BT;
+                Console.WriteLine(counter);
+            }
+            int sum = models.Sum(x => x.WT);
+            Console.WriteLine($"AWT  = {sum / models.Count}");
+        }
+        
     }
 
 }
