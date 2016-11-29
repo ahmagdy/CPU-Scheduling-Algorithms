@@ -78,7 +78,15 @@ namespace ConsoleApplication13
                 new SJFModel("P4",4,5),
             };
             SchedulingAlgorithms.SJFNonPreemptive(m);
+			
+			List<SJFModel> m = new List<SJFModel>
+            {
+				new SJFModel("P1",3,0),
+                new SJFModel("P2",2,1),
+                new SJFModel("P3",1,2)
 
+            };
+            SchedulingAlgorithms.RoundRubinAT(m,2);
 
         }
     }

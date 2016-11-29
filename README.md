@@ -3,7 +3,8 @@ A Simple Simulation to Scheduling Algorithms.
 * First Come First Serve (FCFS)
 * Shortest Job First (SJF) Preemptive
 * Shortest Job First (SJF) Non-Preemptive
-* RoundRubin
+* RoundRubin Without Arrival Time
+* RoundRubin With Arrival Time
 
 ##Examples:
 
@@ -69,4 +70,14 @@ A Simple Simulation to Scheduling Algorithms.
                 new HashModel("P5", 5)
                  };
             SchedulingAlgorithms.RoundRubin(h, 5);
+```
+
+```C#
+            List<SJFModel> m = new List<SJFModel>
+            {
+                new SJFModel("P1",3,0),
+                new SJFModel("P2",2,1),
+                new SJFModel("P3",1,2)
+            };
+            SchedulingAlgorithms.RoundRubinAT(m,2);
 ```

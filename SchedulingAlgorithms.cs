@@ -161,6 +161,53 @@ namespace ConsoleApplication13
             int sum = testHashModels.Sum(x => x.WT);
             Console.WriteLine($"AWT  = {sum/testHashModels.Count}");
         }
+		
+		 //RoundRubin With Arrive Time
+        public static void RoundRubinAT(List<SJFModel> models, int quantum)
+        {
+            int tempbegin = 0;
+            string tempname = "";
+            bool outx = false;
+            var temList  = models.Where(x => x.ArriveTime <= tempbegin && x.BurstTime > 0).ToList(); 
+            for (;;)
+            {
+                
+                foreach (var item in temList)
+                {
+                    if (item.ProcessName.Equals(tempname) && temList.Count > 1)
+                        continue;
+                    Console.Write(tempbegin + "\t");
+                    Console.Write($"{item.ProcessName} ({item.BurstTime})");
+                    item.WT = tempbegin - item.LastEnd - item.ArriveTime + item.WT;
+                    item.ArriveTime = 0;
+                    if (item.BurstTime - quantum < 0)
+                    {
+                        tempbegin += item.BurstTime;
+                        item.BurstTime -= item.BurstTime;
+                    }
+
+                    else
+                    {
+                        item.BurstTime -= quantum;
+                        tempbegin += quantum;
+                    }
+
+                    Console.Write($"||{item.BurstTime}\t");
+                    Console.WriteLine(tempbegin);
+                    
+                    item.LastEnd = tempbegin;
+                    tempname = item.ProcessName;
+                    temList = models.Where(x => x.ArriveTime <= tempbegin && x.BurstTime > 0).OrderBy(x=> x.LastEnd).ToList();
+                    if (temList.Count <1) outx = true;
+                }
+                if (outx) break;
+
+            }
+            models.ForEach(x => Console.WriteLine($"{x.ProcessName}:  {x.WT}"));
+            int sum = models.Sum(x => x.WT);
+            Console.WriteLine($"AWT  = {sum / models.Count}");
+        }
+		
         
          public static void FCFS(ICollection<FCFSModel> models)
         {
