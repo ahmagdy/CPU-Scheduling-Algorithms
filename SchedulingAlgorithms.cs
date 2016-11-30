@@ -165,6 +165,7 @@ namespace ConsoleApplication13
 		 //RoundRubin With Arrive Time
         public static void RoundRubinAT(List<SJFModel> models, int quantum)
         {
+			models = models.OrderBy(x => x.ArriveTime).ToList();
             int tempbegin = 0;
             string tempname = "";
             bool outx = false;
