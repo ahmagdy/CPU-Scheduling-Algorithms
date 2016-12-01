@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MoreLinq;
 
 
-namespace ConsoleApplication13
+namespace CPUSchedulingAlgorithms
 {
 
     class Program
@@ -87,6 +87,16 @@ namespace ConsoleApplication13
 
             };
             SchedulingAlgorithms.RoundRubinAT(m,2);
+			
+			List<PriorityModel> p = new List<PriorityModel>()
+            {
+                new PriorityModel("P1",10,3),
+                new PriorityModel("P2",1,1),
+                new PriorityModel("P3",2,4),
+                new PriorityModel("P4",1,5),
+                new PriorityModel("P5",5,2)
+			};
+            SchedulingAlgorithms.Priority(p);
 
         }
     }

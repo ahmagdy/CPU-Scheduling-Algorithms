@@ -5,6 +5,7 @@ A Simple Simulation to Scheduling Algorithms.
 * Shortest Job First (SJF) Non-Preemptive
 * RoundRubin Without Arrival Time
 * RoundRubin With Arrival Time
+* Priority
 
 ##Examples:
 
@@ -80,4 +81,16 @@ A Simple Simulation to Scheduling Algorithms.
                 new SJFModel("P3",1,2)
             };
             SchedulingAlgorithms.RoundRubinAT(m,2);
+```
+
+```C#
+            List<PriorityModel> p = new List<PriorityModel>()
+            {
+                new PriorityModel("P1",10,3),
+                new PriorityModel("P2",1,1),
+                new PriorityModel("P3",2,4),
+                new PriorityModel("P4",1,5),
+                new PriorityModel("P5",5,2)
+			};
+            SchedulingAlgorithms.Priority(p);
 ```

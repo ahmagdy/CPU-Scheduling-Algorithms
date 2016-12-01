@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication13
+namespace CPUSchedulingAlgorithms
 {
     public class SJFModel
     {
@@ -49,7 +49,21 @@ namespace ConsoleApplication13
         public int BT { get; set; }
         public int WT { get; set; }
     }
-    
+	
+	public class PriorityModel
+    {
+        public PriorityModel(string name, int burstTime,int priority)
+        {
+            this.Name = name;
+            this.BurstTime = burstTime;
+            this.Priority = priority;
+        }
+        public string Name { get; set; }
+        public int BurstTime { get; set; }
+        public int Priority { get; set; }
+        public int WT { get; set; } = 0;
+
+    }
 
     public class SchedulingAlgorithms
     {
@@ -223,6 +237,23 @@ namespace ConsoleApplication13
             }
             int sum = models.Sum(x => x.WT);
             Console.WriteLine($"AWT  = {sum / models.Count}");
+        }
+		
+		public static void Priority(IList<PriorityModel> models)
+        {
+            models = models.OrderBy(i => i.Priority).ToList();
+            int counter = 0;
+            foreach (var item in models)
+            {
+                Console.Write($"{counter}\t |{item.Name}({item.Priority})|\t");
+                item.WT = counter;
+                counter += item.BurstTime;
+                item.BurstTime -= item.BurstTime;
+                Console.WriteLine(counter);
+            }
+            int sum = models.Sum(x => x.WT);
+            Console.WriteLine($"AWT is = {(double) sum/models.Count} ");
+
         }
         
     }
